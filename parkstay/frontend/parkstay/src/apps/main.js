@@ -2,6 +2,7 @@
 // so you don't have to do: import Vue from 'vue/dist/vue'
 // This is done with the browser options. For the config, see package.json
 import Vue from 'vue'
+
 if (process.env.NODE_ENV == "development") {
     Vue.config.devtools = true;
 }
@@ -28,6 +29,7 @@ import store from './store'
 import { mapGetters } from 'vuex'
 import $ from '../hooks'
 var css = require('../hooks-css.js');
+//Vue.config.devtools = true;
 Vue.use(Router);
 Vue.use(resource);
 
@@ -199,3 +201,5 @@ new Vue({
       ])
   }
 }).$mount('#app');
+
+

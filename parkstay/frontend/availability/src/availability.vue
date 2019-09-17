@@ -163,19 +163,8 @@
                                 <button v-else class="button secondary disabled" disabled><small>Change dates</small></button>
                             </template>
                         </td>
-                        <td v-if="!useAdminApi" class="date" v-for="(day, siteAvailabilityIndex) in site.availability" v-bind:key="siteAvailabilityIndex" v-bind:class="{available: day[0]}" > {{ day[1] }} </td>
-                        <td v-if="useAdminApi" class="date" v-for="(day, siteAvailabilityIndex) in site.availability" v-bind:key="siteAvailabilityIndex" v-bind:class="{available: day[0]}" > 
-                            <span data-tooltip v-bind:title="day[3]"> {{ day[1] }} </span>
-                        </td>
-                    </tr>
-                    <template v-if="site.showBreakdown"><tr v-for="(line, breakIndex) in site.breakdown" v-bind:key="breakIndex+'_bd'" class="breakdown">
-                        <td class="site">Site: <span v-if="useAdminApi">{{ line.name }}</span></td>
-                        <td></td>
-                        <td v-if="!useAdminApi" class="date" v-for="(day, availabilityIndex) in line.availability" v-bind:key="availabilityIndex" v-bind:class="{available: day[0]}" >{{ day[1] }}</td>
-                        <td v-if="useAdminApi" class="date" v-for="(day, availabilityIndex) in line.availability" v-bind:key="availabilityIndex" v-bind:class="{available: day[0]}" >
-                            <span data-tooltip v-bind:title="day[3]"> {{ day[1] }} </span>
-                        </td>
-                    </tr></template>
+
+
                 </template></tbody>
             </table>
         </div></div>
