@@ -115,10 +115,12 @@
                         <div id="mapPopupDescription" style="font-size: 0.75rem;"/>
 
                         <!-- Add line to join the 2 buttons into 1 -->
-                        <a id="mapPopupBookInfo" class="button formButton" style="margin-bottom: 0;" target="_blank">More Info/Book now</a>
 
-                        <!-- <a id="mapPopupInfo" class="button formButton" style="margin-bottom: 0; margin-top: 1em;" target="_blank">More info</a>
-                        <a id="mapPopupBook" class="button formButton" style="margin-bottom: 0;" target="_blank">Book now</a> -->
+                       <!--  <a id="mapPopupBookInfo" class="button formButton" style="margin-bottom: 0;" target="_blank">More Info/Book now</a> -->
+
+                        <a id="mapPopupBook" class="button formButton" style="margin-bottom: 0;" target="_blank">Book now</a>
+
+                        <a id="mapPopupInfo" class="button formButton" style="margin-bottom: 0;" target="_blank">More Info</a>
 
                     </div>
                 </div>
@@ -148,9 +150,13 @@
                                 <!-- <a class="button formButton" v-bind:href="parkstayUrl+'/availability/?site_id='+f.id+'&'+bookingParam" target="_blank">More Info/Book now</a> -->
 
 
-                                <a v-if="f.campground_type == 0 || f.campground_type == 1 " class="button formButton" v-bind:href="parkstayUrl+'/availability/?site_id='+f.id+'&'+bookingParam" target="_blank">More Info/Book now</a>
+                                <a v-if="f.campground_type == 0 " class="button formButton1" v-bind:href="parkstayUrl+'/availability/?site_id='+f.id+'&'+bookingParam" target="_blank">Book now</a>
 
-                                <a v-else class="button formButton" v-bind:href="f.info_url" target="_blank">More info/Book now</a>
+                                <a v-else-if="f.campground_type ==1" class="button formButton" v-bind:href="parkstayUrl+'/availability/?site_id='+f.id+'&'+bookingParam" target="_blank">More Info</a>
+
+                               <a v-else-if="f.campground_type ==2" class="button formButton2" v-bind:href="parkstayUrl+'/availability/?site_id='+f.id+'&'+bookingParam" target="_blank">More Info</a>
+
+                               <a v-else class="button formButton" v-bind:href="f.info_url" target="_blank">More info/Book now</a>
 
 
                             <!-- End of change -->
@@ -318,6 +324,18 @@
     .button.formButton {
         display: block;
         width: 100%;
+    }
+
+    .button.formButton1{
+      display: block;
+      background-color: green;
+      width: 100%;
+    }
+
+    .button.formButton2{
+      display: block;
+      background-color: purple;
+      width: 100%;
     }
 
     .button.selector {
@@ -652,7 +670,7 @@ export default {
                         // if (feature.get('campground_type') == 0) {
                         //    $("#mapPopupBook").show();
                         // } else {
-                        //    $("#mapPopupBook").hide();
+                        //    $("#mapPopupInfo").hide();
                         // }
 
                     }, 1000);
@@ -715,10 +733,16 @@ export default {
                 //$("#mapPopupInfo").attr('href', feature.get('info_url'));
 
                // if/else used to diffrentiate campground type(if covers type 0 and 1) ,diffrentiated at api - backend
-                if (feature.get('campground_type') == 0 || feature.get('campground_type') == 1 ){
+                if (feature.get('campground_type') == 0) {
 
-                $("#mapPopupBookInfo").attr('href', vm.parkstayUrl+'/availability/?site_id='+feature.getId()+'&'+vm.bookingParam);
+                $("#mapPopupBook").show();
+                $("#mapPopupBook").attr('href', vm.parkstayUrl+'/availability/?site_id='+feature.getId()+'&'+vm.bookingParam);
+                $("#mapPopupInfo").hide();
+                } else if( feature.get('campground_type') == 1 ){
 
+                $("#mapPopupBook").hide();
+                $("#mapPopupInfo").show();
+                $("#mapPopupInfo").attr('href', vm.parkstayUrl+'/availability/?site_id='+feature.getId()+'&'+vm.bookingParam);
 
                 } else {
                   $("#mapPopupBookInfo").attr('href', feature.get('info_url'));
@@ -1201,14 +1225,24 @@ export default {
 
                 // This portion needs to be modified to accomodate the new button
                 // Online/Offline sites is determined by the backend api
-                if (feature.get('campground_type') == 0 || feature.get('campground_type') == 1 ) {
+                if (feature.get('campground_type') == 0) {
 
-                $("#mapPopupBookInfo").attr('href', vm.parkstayUrl+'/availability/?site_id='+feature.getId()+'&'+vm.bookingParam);
+                $("#mapPopupBook").show()
+                $("#mapPopupInfo").hide()
+                $("#mapPopupBook").attr('href', vm.parkstayUrl+'/availability/?site_id='+feature.getId()+'&'+vm.bookingParam);
+
+                } else if (feature.get('campground_type') == 1 ) {
+
+                $("#mapPopupBook").hide ()
+                $("#mapPopupInfo").show()
+                $("#mapPopupInfo").attr('href', vm.parkstayUrl+'/availability/?site_id='+feature.getId()+'&'+vm.bookingParam);
 
                 }
                 // Now,this section is used for the partner accomadation
                 else {
-                $("#mapPopupBookInfo").attr('href', feature.get('info_url'));
+                $("#mapPopupInfo").show()
+                $("#mapPopupBook").hide()
+                $("#mapPopupInfo").attr('href', feature.get('info_url'));
                 }
 
                 /* $("#mapPopupInfo").attr('href', feature.get('info_url'));

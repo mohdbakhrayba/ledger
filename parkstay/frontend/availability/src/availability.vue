@@ -12,11 +12,12 @@
             <div class="columns small-12 medium-12 large-12">
 
               <!-- Expected changes for the more info for non bookable sites -->
-              <div class="row" v-if="name">
+
+              <!-- <div class="row" v-if="name">
                     <div class="columns small-12">
-                        <h1>Info about camping at {{ name }}</h1>
+                        <h1>Camping at {{ name }}</h1>
                     </div>
-               </div>
+               </div> -->
 
               <div class="columns small-6 medium-6 large-3">
                         <button type="button" class="button formButton" @click="toggleMoreInfo">
@@ -28,7 +29,7 @@
 
                <div class="row" style="margin-bottom:15px;" v-if="showMoreInfo">
                       <div class="columns small-12 medium-12 large-12">
-                        <div v-html="long_description"></div>
+                          <div v-html="long_description"></div>
                       </div>
                 </div>
 
@@ -66,7 +67,7 @@
 
         <div class="row" v-if="name">
             <div class="columns small-12">
-                <h1>Book camping at {{ name }}</h1>
+                <h1>Camping at {{ name }}</h1>
             </div>
         </div>
         <div v-if="ongoing_booking" class="row">
@@ -91,7 +92,7 @@
             <div class="row" v-show="status == 'online'">
             <div v-if="long_description" class="columns small-12 medium-12 large-12">
                 <div class="row">
-                    <div class="columns small-6 medium-6 large-3">
+                    <div class="columns small-6 medium-6 large-3">`````````````
                         <button type="button" class="button formButton" @click="toggleMoreInfo">
                             More Information &nbsp;&nbsp;
                             <i style="font-size:large;" v-if="!showMoreInfo" class="fa fa-caret-down"></i>
